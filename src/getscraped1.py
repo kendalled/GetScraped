@@ -1,7 +1,6 @@
 # GetScraped V2.5.1
 # github.com/kendalled
 
-
 import requests
 import re
 import unicodecsv as csv
@@ -13,15 +12,13 @@ negatives = ['domain.net','group.calendar.google','youremail.com','sample.com','
 
 # Reads website column, initializes counter variable
 df = pd.read_csv('./Data/BigBear.csv')
-urls = list(dict.fromkeys(df['website']))
+
 counter = 0
 final_list = []
-print_list = []
 
 # Set Response Headers
 
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
-
 
 def get_email(url):
 
@@ -56,36 +53,29 @@ def get_email(url):
         print(res)
 
         return res
+
     # Extraneous Fail case
     return []
 
 
 if __name__ == "__main__":
+    # Only appends businesses with valid email
     for index, row in df.iterrows():
         email = get_email(row['website'])
         if(email):
             final_list.append({'business_name': row['business_name'], 'website': row['website'], 'industry': row['industry'], 'city': row['city'], 'state': row['state'], 'email': str(email) })
             counter += len(email)
-
-    # for link in urls:
-    #     print(link)
-    #     email = get_email(link)
-    #     if(email):
-    #         for mail in [elem.lower() for elem in email]:
-    #             final_list.append(mail)
-
-    #         counter += len(email)
-
+        # How many emails do you want? Set to 9999 for all.
         if(counter >= 9):
             break
+        # Printing Status
         print('------------------------')
         print(str(counter) + ' Email(s) found so far.')
         print('------------------------')
 
+    # Writing to CSV
     with open('./Output/BigBear-CA-Emails.csv', 'wb') as csvfile:
-        # final_list = list(set(final_list))
-        # for i in final_list:
-        #     print_list.append({'email': i})
+        
         fieldnames = ['business_name','website','industry','city','state','email']
         writer = csv.DictWriter(csvfile, fieldnames = fieldnames, quoting=csv.QUOTE_ALL)
         writer.writeheader()
@@ -93,4 +83,4 @@ if __name__ == "__main__":
         for data in final_list:
             writer.writerow(data)
 
-    print('File written!')
+    print('File written! Kendall is the best.')
