@@ -49,8 +49,8 @@ def get_email(url):
 
     # Success
     else:
-        print('Emails:\n')
-        print(res)
+        print('Email(s):\n')
+        print(res + '\n')
 
         return res
 
