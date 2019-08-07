@@ -1,7 +1,6 @@
 # GetScraped V2.5.1
 # github.com/kendalled
-### possible regexp: [^\s@<>]+@[^\s@<>]+\.[^\s@<>]+
-###  Backup regexp: '[\w.]+@[\w.]+'
+
 
 import requests
 import re
@@ -9,7 +8,7 @@ import unicodecsv as csv
 import pandas as pd
 
 # Negative Email Endings
-#TODO: remove %20 from beginning
+
 negatives = ['domain.net','group.calendar.google','youremail.com','sample.com','yoursite.com','internet.com','companysite.com','sentry.io','domain.xxx','sentry.wixpress.com', 'example.com', 'domain.com', 'address.com', 'xxx.xxx', 'email.com', 'yourdomain.com']
 
 # Reads website column, initializes counter variable
@@ -62,30 +61,36 @@ def get_email(url):
 
 
 if __name__ == "__main__":
-    for link in urls:
-        print(link)
-        email = get_email(link)
+    for index, row in df.iterrows():
+        email = get_email(row['website'])
         if(email):
-            for mail in [elem.lower() for elem in email]:
-                final_list.append(mail)
-
+            final_list.append({'business_name': row['business_name'], 'website': row['website'], 'industry': row['industry'], 'city': row['city'], 'state': row['state'], 'email': str(email) })
             counter += len(email)
 
-        if(counter >= 2001):
+    # for link in urls:
+    #     print(link)
+    #     email = get_email(link)
+    #     if(email):
+    #         for mail in [elem.lower() for elem in email]:
+    #             final_list.append(mail)
+
+    #         counter += len(email)
+
+        if(counter >= 9):
             break
         print('------------------------')
         print(str(counter) + ' Email(s) found so far.')
         print('------------------------')
 
-    with open('BigBear-CA-Emails.csv', 'wb') as csvfile:
-        final_list = list(set(final_list))
-        for i in final_list:
-            print_list.append({'email': i})
-        fieldnames = ['email']
+    with open('./Output/BigBear-CA-Emails.csv', 'wb') as csvfile:
+        # final_list = list(set(final_list))
+        # for i in final_list:
+        #     print_list.append({'email': i})
+        fieldnames = ['business_name','website','industry','city','state','email']
         writer = csv.DictWriter(csvfile, fieldnames = fieldnames, quoting=csv.QUOTE_ALL)
         writer.writeheader()
 
-        for data in print_list:
+        for data in final_list:
             writer.writerow(data)
 
     print('File written!')

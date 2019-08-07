@@ -1,5 +1,7 @@
 # Testing functionality
 # Kendall Jackson
+### possible regexp: [^\s@<>]+@[^\s@<>]+\.[^\s@<>]+
+###  Backup regexp: '[\w.]+@[\w.]+'
 
 import requests
 import re
