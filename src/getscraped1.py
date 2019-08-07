@@ -50,7 +50,7 @@ def get_email(url):
     # Success
     else:
         print('Email(s):\n')
-        print(res + '\n')
+        print(res)
 
         return res
 
@@ -63,10 +63,11 @@ if __name__ == "__main__":
     for index, row in df.iterrows():
         email = get_email(row['website'])
         if(email):
-            final_list.append({'business_name': row['business_name'], 'website': row['website'], 'industry': row['industry'], 'city': row['city'], 'state': row['state'], 'email': str(email) })
+            for address in [elem.lower() for elem in email]:
+                final_list.append({'business_name': row['business_name'], 'website': row['website'], 'industry': row['industry'], 'city': row['city'], 'state': row['state'], 'email': address })
             counter += len(email)
         # How many emails do you want? Set to 9999 for all.
-        if(counter >= 9):
+        if(counter >= 2000):
             break
         # Printing Status
         print('------------------------')
