@@ -66,7 +66,7 @@ def runtime(filepath):
                 final_list.append({'business': row['business_name'], 'website': row['website'], 'industry': row['industry'], 'city': row['city'], 'state': row['state'], 'email': address })
             counter += len(email)
         # How many emails do you want? Set to 9999 for all.
-        if(counter >= 15):
+        if(counter >= 2000):
             break
         # Printing Status
         print('------------------------')
