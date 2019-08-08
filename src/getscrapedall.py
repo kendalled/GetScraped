@@ -1,23 +1,16 @@
-# GetScraped V2.5.1
+# GetScraped V3.0.1
 # github.com/kendalled
 
 import requests
 import re
 import unicodecsv as csv
 import pandas as pd
+from glob import glob
 
 # Negative Email Endings
-
 negatives = ['domain.net','group.calendar.google','youremail.com','sample.com','yoursite.com','internet.com','companysite.com','sentry.io','domain.xxx','sentry.wixpress.com', 'example.com', 'domain.com', 'address.com', 'xxx.xxx', 'email.com', 'yourdomain.com']
 
-# Reads website column, initializes counter variable
-df = pd.read_csv('./Data/BigBear.csv')
-
-counter = 0
-final_list = []
-
 # Set Response Headers
-
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
 
 def get_email(url):
@@ -58,16 +51,22 @@ def get_email(url):
     return []
 
 
-if __name__ == "__main__":
+def runtime(filepath):
+    # Reads website column, initializes counter variable
+    df = pd.read_csv(filepath)
+    fileName = './Output/' + filepath[filepath.find('/Data/')+6:filepath.find('.csv')] + '-EMAILS.csv'
+    counter = 0
+    final_list = []
+
     # Only appends businesses with valid email
     for index, row in df.iterrows():
         email = get_email(row['website'])
         if(email):
             for address in [elem.lower() for elem in email]:
-                final_list.append({'business_name': row['business_name'], 'website': row['website'], 'industry': row['industry'], 'city': row['city'], 'state': row['state'], 'email': address })
+                final_list.append({'business': row['business_name'], 'website': row['website'], 'industry': row['industry'], 'city': row['city'], 'state': row['state'], 'email': address })
             counter += len(email)
         # How many emails do you want? Set to 9999 for all.
-        if(counter >= 2000):
+        if(counter >= 15):
             break
         # Printing Status
         print('------------------------')
@@ -75,13 +74,18 @@ if __name__ == "__main__":
         print('------------------------')
 
     # Writing to CSV
-    with open('./Output/BigBear-CA-Emails.csv', 'wb') as csvfile:
+    with open(fileName, 'wb') as csvfile:
         
-        fieldnames = ['business_name','website','industry','city','state','email']
+        fieldnames = ['business','website','industry','city','state','email']
         writer = csv.DictWriter(csvfile, fieldnames = fieldnames, quoting=csv.QUOTE_ALL)
         writer.writeheader()
 
         for data in final_list:
             writer.writerow(data)
 
-    print('File written! Kendall is the best.')
+    print('File written! Kendall is the best. On to the next one!')
+
+for entry in glob('./Data/*.csv'):
+    runtime(entry)
+
+print('Finished all files.')
