@@ -3,42 +3,42 @@
 
 import clipboard
 import unicodecsv as csv
-#import pyautogui as pa
+import pyautogui as pa
 
-# Element references
-asi_number_pos = (250, 250)
-extension_pos = (256, 256)
-copy_pos = (123, 123)
-right_arrow_pos = (321, 321)
+# UI references & setting delay
+pa.PAUSE = 1
 
-stringy = '''
-creditreporting@asicentral.com
-maureen@promoteyourbusiness.ca
-kyle@2kprinting.com
-support@asicentral.com
+extension_pos = (980, 52)
+copy_pos = (943, 170)
+right_arrow_pos = (245, 513)
 
-Upgrade the extension to autosave and automate your emails ID capture.'''
+# Elements to be removed
+asi_email1 = 'creditreporting@asicentral.com'
+asi_email2 = 'support@asicentral.com'
+ad_text = 'Upgrade the extension to autosave and automate your emails ID capture.'
 
 def cleanupData(string_input):
-    asi_email1 = 'creditreporting@asicentral.com'
-    asi_email2 = 'support@asicentral.com'
-    ad_text = 'Upgrade the extension to autosave and automate your emails ID capture.'
+   
     # Removing ASI emails, empty elements, and ad text
-    listy = list(filter(('').__ne__, stringy.split('\n')))
+    listy = list(filter(('').__ne__, string_input.split('\n')))
     listy.remove(ad_text)
     listy.remove(asi_email1)
     listy.remove(asi_email2)
     print(listy)
     return(listy)
 
-def get_100_emails():
+def get_25_emails():
+
     clipped_data = ''
-    for i in range(100):
+    asi_number_pos_x = 103
+    asi_number_pos_y = 593
+
+    for i in range(25):
         #TODO: Click Red asi number (right end)
-        pa.click(asi_number_pos)
-        #TODO: Scroll down slightly
+        pa.click(asi_number_pos_x, asi_number_pos_y)
+        asi_number_pos_y += 43
         
-        # rinses and repeats x 100
+        # rinses and repeats x 25 elements
     
     #Click extension, click copy all
     pa.click(extension_pos)
@@ -54,11 +54,11 @@ if __name__ == "__main__":
     final_list = []
     #TODO: Change to 20
     for i in range(3):
-        temp_list = get_100_emails()
+        temp_list = get_25_emails()
         for elem in temp_list:
             final_list.append(elem)
           
-        # then, click right arrow
+        # click right arrow
         pa.click(right_arrow_pos)
     
     #TODO: return/write csv output
