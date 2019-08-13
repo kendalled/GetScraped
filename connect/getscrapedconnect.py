@@ -4,6 +4,9 @@
 import clipboard
 import unicodecsv as csv
 import pyautogui as pa
+import random
+import string
+
 
 # UI references & setting delay
 pa.PAUSE = 1
@@ -56,27 +59,27 @@ def get_25_emails():
     #Convert clipboard to string, pass through cleanupData()
     clipped_data = clipboard.paste()
     
-    #returns data (to be appended to final_list)
+    #returns data (to be appended to temp_list)
     return(cleanupData(clipped_data))
 
 if __name__ == "__main__":
     temp_list = []
-    final_list = []
+    
     
     #TODO: Change to 20
-    for i in range(1):
+    for i in range(20):
         temp_list = get_25_emails()
-        for elem in temp_list:
-            final_list.append(elem)
-    for j, element in enumerate(final_list):
-        res.append({'id': j,'email': element})
-            
-          
+                
         # click right arrow
         pa.click(right_arrow_pos)
-    
+
+        for element in temp_list:
+            random_id = ''.join([random.choice(string.ascii_letters 
+            + string.digits) for n in range(8)])
+            res.append({'id': random_id,'email': element})
+        
     #return/write csv output
-    print(final_list)
+    print(temp_list)
     with open('asi-connect-scraped-links.csv', 'wb') as f:
         fieldnames = ['id','email']
         writer = csv.DictWriter(f, fieldnames = fieldnames, quoting=csv.QUOTE_ALL)
