@@ -71,7 +71,7 @@ if __name__ == "__main__":
     
     #return/write csv output
     print(final_list)
-    with open('./Output/asi-connect-scraped-links.csv', 'wb') as f:
+    with open('asi-connect-scraped-links.csv', 'wb') as f:
         csv.writer(f).writerows(final_list)
 
    
