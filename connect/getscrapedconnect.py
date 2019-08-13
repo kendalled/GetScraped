@@ -6,7 +6,7 @@ import unicodecsv as csv
 import pyautogui as pa
 
 # UI references & setting delay
-pa.PAUSE = 1.5
+pa.PAUSE = 1
 
 extension_pos = (980, 52)
 copy_pos = (943, 170)
@@ -16,6 +16,8 @@ right_arrow_pos = (245, 513)
 asi_email1 = 'creditreporting@asicentral.com'
 asi_email2 = 'support@asicentral.com'
 ad_text = 'Upgrade the extension to autosave and automate your emails ID capture'
+
+res = []
 
 def cleanupData(string_input):
    
@@ -60,11 +62,15 @@ def get_25_emails():
 if __name__ == "__main__":
     temp_list = []
     final_list = []
+    
     #TODO: Change to 20
-    for i in range(5):
+    for i in range(1):
         temp_list = get_25_emails()
         for elem in temp_list:
             final_list.append(elem)
+    for j, element in enumerate(final_list):
+        res.append({'id': j,'email': element})
+            
           
         # click right arrow
         pa.click(right_arrow_pos)
@@ -72,7 +78,13 @@ if __name__ == "__main__":
     #return/write csv output
     print(final_list)
     with open('asi-connect-scraped-links.csv', 'wb') as f:
-        csv.writer(f).writerows(final_list)
+        fieldnames = ['id','email']
+        writer = csv.DictWriter(f, fieldnames = fieldnames, quoting=csv.QUOTE_ALL)
+        writer.writeheader()
+
+        for data in res:
+            writer.writerow(data)
+            
 
    
 
