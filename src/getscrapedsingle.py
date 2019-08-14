@@ -11,7 +11,7 @@ import pandas as pd
 negatives = ['domain.net','group.calendar.google','youremail.com','sample.com','yoursite.com','internet.com','companysite.com','sentry.io','domain.xxx','sentry.wixpress.com', 'example.com', 'domain.com', 'address.com', 'xxx.xxx', 'email.com', 'yourdomain.com']
 
 # Reads website column, initializes counter variable
-df = pd.read_csv('./Data/Attu-AK.csv')
+df = pd.read_csv('./Orlando.csv')
 
 counter = 0
 final_list = []
@@ -67,7 +67,7 @@ if __name__ == "__main__":
                 final_list.append({'business_name': row['business_name'], 'website': row['website'], 'industry': row['industry'], 'city': row['city'], 'state': row['state'], 'email': address })
             counter += len(email)
         # How many emails do you want? Set to 9999 for all.
-        if(counter >= 2000):
+        if(counter >= 5000):
             break
         # Printing Status
         print('------------------------')
@@ -75,7 +75,7 @@ if __name__ == "__main__":
         print('------------------------')
 
     # Writing to CSV
-    with open('./Output/Attu-AK-Emails.csv', 'wb') as csvfile:
+    with open('Orlando-List.csv', 'wb') as csvfile:
         
         fieldnames = ['business_name','website','industry','city','state','email']
         writer = csv.DictWriter(csvfile, fieldnames = fieldnames, quoting=csv.QUOTE_ALL)
