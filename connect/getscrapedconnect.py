@@ -9,11 +9,11 @@ import string
 
 
 # UI references & setting delay
-pa.PAUSE = 1
+pa.PAUSE = 1.5
 
-extension_pos = (980, 52)
-copy_pos = (943, 170)
-right_arrow_pos = (245, 513)
+extension_pos = (2461, 86)
+copy_pos = (2424, 201)
+right_arrow_pos = (986, 157)
 
 # Elements to be removed
 asi_email1 = 'creditreporting@asicentral.com'
@@ -30,11 +30,12 @@ def cleanupData(string_input):
     
     for ind, element in enumerate(listy):
         listy[ind] = element[:-1]
-        
-    listy.remove(asi_email1)
-    listy.remove(asi_email2)
-    listy.remove(ad_text)
-    
+    if asi_email1 in listy:
+      listy.remove(asi_email1)
+    if asi_email2 in listy:
+      listy.remove(asi_email2)  
+    if ad_text in listy:
+      listy.remove(ad_text)
     while '' in listy:
         listy.remove('')
 
@@ -43,8 +44,8 @@ def cleanupData(string_input):
 def get_25_emails():
 
     clipped_data = ''
-    asi_number_pos_x = 103
-    asi_number_pos_y = 593
+    asi_number_pos_x = 843
+    asi_number_pos_y = 239
 
     for i in range(25):
         #TODO: Click Red asi number (right end)
@@ -67,7 +68,7 @@ if __name__ == "__main__":
     
     
     #TODO: Change to 20
-    for i in range(20):
+    for i in range(2):
         temp_list = get_25_emails()
                 
         # click right arrow
