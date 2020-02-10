@@ -1,4 +1,4 @@
-# GetScrapedConnect V0.0.1 (ASI Connect - Windows Build)
+# GetScrapedConnect V1.0.1 (ASI Connect - Macintosh Build)
 # github.com/kendalled
 
 import clipboard
@@ -73,6 +73,7 @@ if __name__ == "__main__":
         # click right arrow
         pa.click(right_arrow_pos)
 
+        # creates uuid
         for element in temp_list:
             random_id = ''.join([random.choice(string.ascii_letters 
             + string.digits) for n in range(8)])
