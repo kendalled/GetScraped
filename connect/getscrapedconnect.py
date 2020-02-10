@@ -11,9 +11,9 @@ import string
 # UI references & setting delay
 pa.PAUSE = 1.5
 
-extension_pos = (981, 51)
+extension_pos = (982, 52)
 copy_pos = (942, 170)
-right_arrow_pos = (74, 392)
+right_arrow_pos = (75, 515)
 
 # Elements to be removed
 asi_email1 = 'creditreporting@asicentral.com'
@@ -44,8 +44,8 @@ def cleanupData(string_input):
 def get_25_emails():
 
     clipped_data = ''
-    asi_number_pos_x = 99
-    asi_number_pos_y = 471
+    asi_number_pos_x = 98
+    asi_number_pos_y = 596
 
     for i in range(25):
         #TODO: Click Red asi number (right end)
