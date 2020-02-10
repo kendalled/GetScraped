@@ -1,4 +1,4 @@
-# GetScrapedConnect V1.0.1 (ASI Connect - Macintosh Build)
+# GetScrapedConnect V1.0.1 (ASI Connect - Portrait Win Build)
 # github.com/kendalled
 
 import clipboard
@@ -11,9 +11,9 @@ import string
 # UI references & setting delay
 pa.PAUSE = 1.5
 
-extension_pos = (2461, 86)
-copy_pos = (2424, 201)
-right_arrow_pos = (986, 157)
+extension_pos = (981, 51)
+copy_pos = (942, 170)
+right_arrow_pos = (74, 392)
 
 # Elements to be removed
 asi_email1 = 'creditreporting@asicentral.com'
@@ -44,8 +44,8 @@ def cleanupData(string_input):
 def get_25_emails():
 
     clipped_data = ''
-    asi_number_pos_x = 843
-    asi_number_pos_y = 239
+    asi_number_pos_x = 99
+    asi_number_pos_y = 471
 
     for i in range(25):
         #TODO: Click Red asi number (right end)
