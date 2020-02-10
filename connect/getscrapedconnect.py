@@ -67,7 +67,7 @@ if __name__ == "__main__":
     temp_list = []
     
     
-    #TODO: Change to 20
+    #TODO: Change to 20 (last full page - 1 )
     for i in range(2):
         temp_list = get_25_emails()
                 
