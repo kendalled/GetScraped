@@ -87,5 +87,7 @@ def runtime(filepath):
 
 for entry in glob('./Data/*.csv'):
     runtime(entry)
+    # for debugging:
+    # print(entry)
 
 print('Finished all files.')
