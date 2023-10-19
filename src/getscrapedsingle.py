@@ -8,10 +8,10 @@ import pandas as pd
 
 # Negative Email Endings
 
-negatives = ['domain.net','group.calendar.google','youremail.com','sample.com','yoursite.com','internet.com','companysite.com','sentry.io','domain.xxx','sentry.wixpress.com', 'example.com', 'domain.com', 'address.com', 'xxx.xxx', 'email.com', 'yourdomain.com']
+negatives = {'domain.net','group.calendar.google','youremail.com','sample.com','yoursite.com','internet.com','companysite.com','sentry.io','domain.xxx','sentry.wixpress.com', 'example.com', 'domain.com', 'address.com', 'xxx.xxx', 'email.com', 'yourdomain.com'}
 
 # Reads website column, initializes counter variable
-df = pd.read_csv('./Orlando.csv')
+df = pd.read_csv('./Data/Attu-AK.csv')
 
 counter = 0
 final_list = []
