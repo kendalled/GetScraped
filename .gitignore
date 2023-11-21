@@ -1,2 +1,5 @@
 ./firestore/getscrapedfirestore/bin/*
 
+src/Data/fires.csv
+src/Output/fires-EMAILS.csv
+src/Output/fires-EMAILS2.csv
